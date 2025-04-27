@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -63,13 +63,15 @@ import { Subject } from 'rxjs';
   styles: []
 })
 export class DogSearchComponent {
+  private readonly dogApiService = inject(DogApiService);
+  
   searchQuery = '';
   searchSubject = new Subject<string>();
   searchResults = signal<DogSearchResult[]>([]);
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
 
-  constructor(private dogApiService: DogApiService) {
+  constructor() {
     this.setupSearch();
   }
 

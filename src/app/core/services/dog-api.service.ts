@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHandler } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { DogBreed, DogBreedsResponse, DogImage, DogSearchResult } from '../types/dog.types';
 
@@ -13,6 +13,8 @@ export class DogApiService {
   private readonly errorSignal = signal<string | null>(null);
   
   private readonly http = inject(HttpClient);
+  private readonly httpHandler = inject(HttpHandler);
+  private readonly httpBackend = inject(HttpBackend);
 
   constructor() {
     this.loadBreeds();

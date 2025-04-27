@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DogDisplayComponent } from './components/dog-display/dog-display.component';
+import { MainLayoutComponent } from './core/layout/main-layout/main-layout.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, DogDisplayComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [RouterOutlet, MainLayoutComponent],
+  template: `<app-main-layout></app-main-layout>`,
+  styles: []
 })
 export class AppComponent {
-  title = 'Dog API';
+  title = 'DogFinder';
 }

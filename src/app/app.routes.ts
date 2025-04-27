@@ -8,17 +8,17 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/search/components/dog-search/dog-search.component')
+        loadComponent: () => import('./features/dog-search/presentation/dog-search.component')
           .then(m => m.DogSearchComponent)
       },
       {
         path: 'favorites',
-        loadComponent: () => import('./features/favorites/components/favorites/favorites.component')
+        loadComponent: () => import('./features/favorites/presentation/favorites.component')
           .then(m => m.FavoritesComponent)
       },
       {
         path: 'settings',
-        loadComponent: () => import('./features/settings/components/settings/settings.component')
+        loadComponent: () => import('./features/settings/presentation/settings.component')
           .then(m => m.SettingsComponent)
       }
     ]

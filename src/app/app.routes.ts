@@ -15,11 +15,6 @@ export const routes: Routes = [
         path: 'favorites',
         loadComponent: () => import('./features/favorites/presentation/favorites.component')
           .then(m => m.FavoritesComponent)
-      },
-      {
-        path: 'settings',
-        loadComponent: () => import('./features/settings/presentation/settings.component')
-          .then(m => m.SettingsComponent)
       }
     ]
   }

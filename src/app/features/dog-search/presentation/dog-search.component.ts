@@ -5,8 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DogApiService } from '../data/dog-api.service';
-import { DogSearchResult } from '../../../shared/models/dog.types';
-import { DogCardComponent } from '../../../shared/components/dog-card/dog-card.component';
+import { DogSearchResult } from '@models/dog.types';
+import { DogCardComponent } from '@components/dog-card/dog-card.component';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

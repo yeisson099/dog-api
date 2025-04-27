@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHandler } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { DogBreed, DogBreedsResponse, DogImage, DogSearchResult } from '../../../shared/models/dog.types';
+import { DogBreed, DogBreedsResponse, DogImage, DogSearchResult } from '@models/dog.types';
 
 @Injectable({
   providedIn: 'root'

@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { navigationItems } from '../../config/navigation.config';
+import { routeAnimations } from '../../animations/route-animations';
 
 @Component({
   selector: 'app-main-layout',
@@ -21,7 +22,7 @@ import { navigationItems } from '../../config/navigation.config';
     MatListModule
   ],
   template: `
-    <div class="min-h-screen flex flex-col">
+    <div class="h-screen flex flex-col">
       <mat-sidenav-container class="flex-grow">
         <mat-sidenav #sidenav mode="side" class="w-64">
           <mat-nav-list>
@@ -38,36 +39,36 @@ import { navigationItems } from '../../config/navigation.config';
           </mat-nav-list>
         </mat-sidenav>
 
-        <mat-sidenav-content>
-          <mat-toolbar color="primary" class="fixed top-0 z-50 w-[calc(100%-16rem)]">
+        <mat-sidenav-content class="flex flex-col">
+          <mat-toolbar color="primary" class="fixed top-0 z-50 w-[calc(100%-64px)]">
             <button mat-icon-button (click)="sidenav.toggle()">
               <mat-icon>menu</mat-icon>
             </button>
-            <span class="ml-4 text-xl font-bold">DogFinder</span>
+            <span class="ml-4 text-xl font-bold cursor-pointer" routerLink="/">DogFinder</span>
           </mat-toolbar>
 
-          <div class="mt-16">
+          <div class="flex-grow overflow-auto mt-6" [@routeAnimations]>
             <router-outlet></router-outlet>
           </div>
+
+          <footer class="bg-gray-100 py-4 fixed bottom-0 w-[calc(100%)]">
+            <div class="container mx-auto px-4 text-center text-gray-600">
+              <p>© 2024 DogFinder. All rights reserved.</p>
+              <div class="mt-2">
+                <a href="https://github.com/yourusername/dogfinder" target="_blank" class="text-indigo-600 hover:text-indigo-800 mx-2">
+                  GitHub
+                </a>
+                <a href="mailto:contact@dogfinder.com" class="text-indigo-600 hover:text-indigo-800 mx-2">
+                  Contact
+                </a>
+              </div>
+            </div>
+          </footer>
         </mat-sidenav-content>
       </mat-sidenav-container>
-
-      <footer class="bg-gray-100 py-4 mt-auto">
-        <div class="container mx-auto px-4 text-center text-gray-600">
-          <p>© 2024 DogFinder. All rights reserved.</p>
-          <div class="mt-2">
-            <a href="https://github.com/yourusername/dogfinder" target="_blank" class="text-indigo-600 hover:text-indigo-800 mx-2">
-              GitHub
-            </a>
-            <a href="mailto:contact@dogfinder.com" class="text-indigo-600 hover:text-indigo-800 mx-2">
-              Contact
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   `,
-  styles: []
+  animations: [routeAnimations]
 })
 export class MainLayoutComponent {
   protected readonly navigationItems = navigationItems;

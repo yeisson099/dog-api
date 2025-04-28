@@ -11,7 +11,7 @@ import { DogStore } from '@core/store/dog.store';
   template: `
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-2xl font-bold mb-6">Favorite Dogs</h1>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 place-items-center">
         @if (store.favorites$().length === 0) {
           <p class="col-span-full text-center text-gray-500 py-8">
             No favorites yet. Start adding some dogs to your favorites!

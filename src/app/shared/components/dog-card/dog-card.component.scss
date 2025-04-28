@@ -1,0 +1,124 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dog-card {
+  width: 18rem;
+  height: 300px;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease-out, scaleIn 0.5s ease-out;
+
+  &:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    transform: translateY(-5px);
+  }
+
+  &__image {
+    height: 12rem;
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      object-position: center;
+      object-fit: contain;
+      aspect-ratio: 3 / 2;
+      background: black;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__content {
+    padding: 0.75rem;
+    flex-grow: 1;
+
+    h3 {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: rgb(31, 41, 55);
+      transition: color 0.3s ease;
+    }
+
+    p {
+      text-align: center;
+      font-size: 0.875rem;
+      color: rgb(75, 85, 99);
+      margin-top: 0.25rem;
+      transition: color 0.3s ease;
+    }
+  }
+
+  &__actions {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+
+    button {
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &.favorite {
+        color: rgb(239, 68, 68);
+        animation: pulse 1s infinite;
+
+        mat-icon {
+          transition: transform 0.3s ease;
+        }
+
+        &:hover mat-icon {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+} 

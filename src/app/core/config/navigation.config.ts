@@ -16,10 +16,5 @@ export const navigationItems: NavigationItem[] = [
     path: '/favorites',
     title: 'Favorites',
     icon: 'favorite'
-  },
-  {
-    path: '/settings',
-    title: 'Settings',
-    icon: 'settings'
   }
 ]; 

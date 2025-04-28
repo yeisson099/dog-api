@@ -67,7 +67,7 @@ The project uses several tools to maintain code quality:
 
 ## Deployment 🚀
 
-The application is automatically deployed to AWS Amplify when changes are pushed to the main branch. The deployment process is handled by GitHub Actions.
+The application is automatically deployed to AWS Amplify when changes are pushed to the main branch. The deployment process is handled by AWS Amplify.
 
 ### Manual Deployment
 

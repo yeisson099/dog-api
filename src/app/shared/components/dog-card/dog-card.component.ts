@@ -16,6 +16,16 @@ import { DogSearchResult } from '@models/dog.types';
           [src]="dog.imageUrl" 
           [alt]="dog.breed" 
         >
+        <button 
+          mat-icon-button 
+          class="dog-card__favorite-button"
+          [class.favorite]="isFavorite"
+          (click)="onFavoriteToggle()"
+        >
+          <mat-icon>
+            {{ isFavorite ? 'favorite' : 'favorite_border' }}
+          </mat-icon>
+        </button>
       </div>
       
       <mat-card-content class="dog-card__content">
@@ -24,18 +34,6 @@ import { DogSearchResult } from '@models/dog.types';
           <p>{{ dog.subBreed | titlecase }}</p>
         }
       </mat-card-content>
-
-      <mat-card-actions class="dog-card__actions">
-        <button 
-          mat-icon-button 
-          [class.favorite]="isFavorite"
-          (click)="onFavoriteToggle()"
-        >
-          <mat-icon>
-            {{ isFavorite ? 'favorite' : 'favorite_border' }}
-          </mat-icon>
-        </button>
-      </mat-card-actions>
     </mat-card>
   `,
   styleUrls: ['./dog-card.component.scss']

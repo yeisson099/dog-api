@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { navigationItems } from '../../config/navigation.config';
 
 @Component({
   selector: 'app-main-layout',
@@ -21,33 +22,33 @@ import { MatListModule } from '@angular/material/list';
   ],
   template: `
     <div class="min-h-screen flex flex-col">
-      <mat-toolbar color="primary" class="fixed top-0 z-50">
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span class="ml-4 text-xl font-bold">DogFinder</span>
-      </mat-toolbar>
-
       <mat-sidenav-container class="flex-grow">
         <mat-sidenav #sidenav mode="side" class="w-64">
           <mat-nav-list>
-            <a mat-list-item routerLink="/" routerLinkActive="bg-gray-100">
-              <mat-icon matListItemIcon>home</mat-icon>
-              <span matListItemTitle>Home</span>
-            </a>
-            <a mat-list-item routerLink="/favorites" routerLinkActive="bg-gray-100">
-              <mat-icon matListItemIcon>favorite</mat-icon>
-              <span matListItemTitle>Favorites</span>
-            </a>
-            <a mat-list-item routerLink="/settings" routerLinkActive="bg-gray-100">
-              <mat-icon matListItemIcon>settings</mat-icon>
-              <span matListItemTitle>Settings</span>
-            </a>
+            @for (item of navigationItems; track item.path) {
+              <a 
+                mat-list-item 
+                [routerLink]="item.path" 
+                routerLinkActive="bg-gray-100"
+              >
+                <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+                <span matListItemTitle>{{ item.title }}</span>
+              </a>
+            }
           </mat-nav-list>
         </mat-sidenav>
 
-        <mat-sidenav-content class="mt-16">
-          <router-outlet></router-outlet>
+        <mat-sidenav-content>
+          <mat-toolbar color="primary" class="fixed top-0 z-50 w-[calc(100%-16rem)]">
+            <button mat-icon-button (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <span class="ml-4 text-xl font-bold">DogFinder</span>
+          </mat-toolbar>
+
+          <div class="mt-16">
+            <router-outlet></router-outlet>
+          </div>
         </mat-sidenav-content>
       </mat-sidenav-container>
 
@@ -68,4 +69,6 @@ import { MatListModule } from '@angular/material/list';
   `,
   styles: []
 })
-export class MainLayoutComponent {} 
+export class MainLayoutComponent {
+  protected readonly navigationItems = navigationItems;
+} 

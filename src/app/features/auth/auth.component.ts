@@ -7,16 +7,16 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
   standalone: true,
   imports: [CommonModule, AmplifyAuthenticatorModule],
   template: `
+    <div class="mt-16">
      <amplify-authenticator [loginMechanisms]="['email']" [signUpAttributes]="['email']" [formFields]="formFields">
-      <ng-template
-        amplifySlot="authenticated"
-        let-user="user"
-        let-signOut="signOut"
-      >
-        <h1>Welcome {{ user.username }}!</h1>
-        <button (click)="signOut()">Sign Out</button>
-      </ng-template>
-    </amplify-authenticator>
+        <ng-template
+          amplifySlot="authenticated"
+          let-user="user"
+          let-signOut="signOut"
+        >
+        </ng-template>
+      </amplify-authenticator>
+    </div>
   `,
   styles: [`
     :host {

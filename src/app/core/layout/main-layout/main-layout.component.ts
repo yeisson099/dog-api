@@ -50,6 +50,10 @@ import awsconfig from '../../../../aws-exports';
               <mat-icon>menu</mat-icon>
             </button>
             <span class="ml-4 text-xl font-bold cursor-pointer" routerLink="/">DogFinder</span>
+            <span class="flex-grow"></span>
+            <button mat-icon-button (click)="authenticator.signOut()" matTooltip="Sign Out">
+              <mat-icon>logout</mat-icon>
+            </button>
           </mat-toolbar>
 
           <div class="flex-grow overflow-auto mt-6" [@routeAnimations]>

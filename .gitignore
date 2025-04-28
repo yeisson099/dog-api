@@ -43,12 +43,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# AWS
-.aws/
-amplify/
-aws-exports.js
-awsconfiguration.json
-
 # Environment
 .env
 .env.local

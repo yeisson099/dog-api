@@ -8,6 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { navigationItems } from '../../config/navigation.config';
 import { routeAnimations } from '../../animations/route-animations';
+import { RouterOutlet } from '@angular/router';
+import { Amplify } from 'aws-amplify';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import awsconfig from '../../../../aws-exports';
 
 @Component({
   selector: 'app-main-layout',
@@ -19,7 +23,8 @@ import { routeAnimations } from '../../animations/route-animations';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    RouterOutlet
   ],
   template: `
     <div class="h-screen flex flex-col">
@@ -68,8 +73,19 @@ import { routeAnimations } from '../../animations/route-animations';
       </mat-sidenav-container>
     </div>
   `,
-  animations: [routeAnimations]
+  animations: [routeAnimations],
+  styles: [`
+    .main-layout {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  `]
 })
 export class MainLayoutComponent {
   protected readonly navigationItems = navigationItems;
+
+  constructor(public authenticator: AuthenticatorService) {
+    Amplify.configure(awsconfig);
+  }
 } 

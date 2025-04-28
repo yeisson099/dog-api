@@ -63,6 +63,20 @@ export class DogApiService {
       );
   }
 
+  getRandomDogs(count: number): Observable<DogSearchResult[]> {
+    return this.http.get<{ message: string[] }>(`${this.API_URL}/breeds/image/random/${count}`)
+      .pipe(
+        map(response => response.message.map(url => {
+          const parts = url.split('/');
+          const breed = parts[parts.length - 2];
+          return {
+            breed,
+            imageUrl: url
+          };
+        }))
+      );
+  }
+
   searchDogs(query: string): Observable<DogSearchResult[]> {
     const searchResults: DogSearchResult[] = [];
     const breeds = this.breedsSignal();

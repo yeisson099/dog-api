@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -7,8 +7,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DogApiService } from '../data/dog-api.service';
 import { DogSearchResult } from '@models/dog.types';
 import { DogCardComponent } from '@components/dog-card/dog-card.component';
+import { DogStore } from '@core/store/dog.store';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-dog-search',
@@ -54,7 +55,11 @@ import { Subject } from 'rxjs';
           </div>
         } @else {
           @for (dog of searchResults(); track dog.breed + (dog.subBreed || '')) {
-            <app-dog-card [dog]="dog"></app-dog-card>
+            <app-dog-card 
+              [dog]="dog"
+              [isFavorite]="store.isFavorite(dog)"
+              (favoriteToggle)="store.toggleFavorite(dog)"
+            ></app-dog-card>
           }
         }
       </div>
@@ -62,8 +67,9 @@ import { Subject } from 'rxjs';
   `,
   styles: []
 })
-export class DogSearchComponent {
+export class DogSearchComponent implements OnInit {
   private readonly dogApiService = inject(DogApiService);
+  protected readonly store = inject(DogStore);
   
   searchQuery = '';
   searchSubject = new Subject<string>();
@@ -73,6 +79,31 @@ export class DogSearchComponent {
 
   constructor() {
     this.setupSearch();
+  }
+
+  ngOnInit(): void {
+    this.loadRandomDogs();
+  }
+
+  private loadRandomDogs(): void {
+    this.loading.set(true);
+    // Hacer 4 llamadas para obtener 12 imágenes (3 por llamada)
+    const requests = Array(4).fill(null).map(() => 
+      this.dogApiService.getRandomDogs(3)
+    );
+
+    forkJoin(requests).subscribe({
+      next: (results) => {
+        const allDogs = results.flat();
+        this.searchResults.set(allDogs);
+        this.store.updateSearchResults(allDogs);
+        this.loading.set(false);
+      },
+      error: (error) => {
+        this.error.set('Error loading random dogs');
+        this.loading.set(false);
+      }
+    });
   }
 
   private setupSearch(): void {
@@ -87,6 +118,7 @@ export class DogSearchComponent {
     ).subscribe({
       next: (results) => {
         this.searchResults.set(results);
+        this.store.updateSearchResults(results);
         this.loading.set(false);
       },
       error: (error) => {

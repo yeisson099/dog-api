@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - echo "Dependencies are installed in GitHub Actions"
     build:
       commands:
         - npm run build
@@ -31,5 +31,5 @@ frontend:
       status: '200'
       condition: null
   customDomain:
-    domainName: dog-api.sourcemeridian
+    domainName: dog-api.sourcemeridian.com
     enableAutoSubdomain: true 

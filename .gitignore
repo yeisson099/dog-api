@@ -9,6 +9,7 @@
 # Node
 /node_modules
 npm-debug.log
+yarn-debug.log
 yarn-error.log
 
 # IDEs and editors
@@ -19,6 +20,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.vscode/*
 
 # Visual Studio Code
 .vscode/*
@@ -40,3 +42,37 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# AWS
+.aws/
+amplify/
+aws-exports.js
+awsconfiguration.json
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Testing
+/coverage
+/.nyc_output
+
+# Production
+/build
+
+# Debug
+.debug/
+
+# Local Netlify folder
+.netlify

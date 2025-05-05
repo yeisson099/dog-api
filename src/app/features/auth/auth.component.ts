@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
-
+import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Amplify } from 'aws-amplify';
+import awsconfig from '../../../../aws-exports';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-auth',
   standalone: true,
@@ -27,6 +29,9 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 })
 
 export class AuthComponent {
+  authenticator = inject(AuthenticatorService)
+  router = inject(Router)
+
   formFields = {
     signUp: {
       email: {
@@ -43,4 +48,12 @@ export class AuthComponent {
       }
     }
   };
+
+  constructor() {
+    this.authenticator.subscribe(({ authStatus }) => {
+      if (authStatus === 'authenticated') {
+        this.router.navigate(['/']);
+      }
+    });
+  }
 } 

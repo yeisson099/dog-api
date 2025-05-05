@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AuthUser, getCurrentUser, signOut, fetchAuthSession, AuthTokens } from 'aws-amplify/auth';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  router = inject(Router)
   constructor() { }
 
   async getCurrentUser(): Promise<AuthUser> {
@@ -21,6 +22,8 @@ export class AuthService {
   }
 
   signOut() {
-    signOut();
+    signOut().then(() => {
+      this.router.navigate(['/auth']);
+    });
   }
 } 

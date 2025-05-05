@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -10,8 +10,8 @@ import { navigationItems } from '../../config/navigation.config';
 import { routeAnimations } from '../../animations/route-animations';
 import { RouterOutlet } from '@angular/router';
 import { Amplify } from 'aws-amplify';
-import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import awsconfig from '../../../../aws-exports';
+import { AuthService } from '@app/core/services/auth.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -51,7 +51,7 @@ import awsconfig from '../../../../aws-exports';
             </button>
             <span class="ml-4 text-xl font-bold cursor-pointer" routerLink="/">DogFinder</span>
             <span class="flex-grow"></span>
-            <button mat-icon-button (click)="authenticator.signOut()" matTooltip="Sign Out">
+            <button mat-icon-button (click)="authService.signOut()" matTooltip="Sign Out">
               <mat-icon>logout</mat-icon>
             </button>
           </mat-toolbar>
@@ -88,8 +88,9 @@ import awsconfig from '../../../../aws-exports';
 })
 export class MainLayoutComponent {
   protected readonly navigationItems = navigationItems;
+  authService = inject(AuthService)
 
-  constructor(public authenticator: AuthenticatorService) {
+  constructor() {
     Amplify.configure(awsconfig);
   }
 } 
